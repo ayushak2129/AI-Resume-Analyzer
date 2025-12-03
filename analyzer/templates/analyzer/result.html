@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analysis Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #eef1f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #2c3e50;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #2b3a55;
+            margin-bottom: 15px;
+            border-left: 5px solid #4a90e2;
+            padding-left: 12px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            background: #f3f4f7;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .subheading {
+            color: #34495e;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .btn:hover {
+            background: #3577c0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #e8effc;
+            color: #2c3e50;
+            border-radius: 6px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .match-good {
+            background: #d4f8d4;
+            color: #1b5e20;
+        }
+
+        .match-bad {
+            background: #ffe5e5;
+            color: #c62828;
+        }
+
+        .score-box {
+            font-size: 18px;
+            padding: 10px;
+            background: #f6f9fc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Resume Analysis Result</h1>
+
+    <!-- Raw Extracted Text -->
+    <div class="card">
+        <h2 class="section-title">Extracted Resume Text</h2>
+        <pre>{{ extracted_text }}</pre>
+    </div>
+
+    <!-- Parsed Sections -->
+    <div class="card">
+        <h2 class="section-title">Parsed Sections</h2>
+
+        {% for key, value in sections.items %}
+            <div class="subheading">{{ key|title }}</div>
+            <pre>{{ value }}</pre>
+        {% empty %}
+            <p>No sections detected.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Additional Extracted Details -->
+    <div class="card">
+        <h2 class="section-title">Additional Details</h2>
+
+        <p><strong>Years of Experience:</strong> {{ extra.years_of_experience }}</p>
+        <p><strong>Degrees:</strong>
+            {% for d in extra.degrees %}
+                <span class="badge">{{ d }}</span>
+            {% endfor %}
+        </p>
+
+        <p><strong>Programming Languages:</strong>
+            {% for s in extra.programming_languages %}
+                <span class="badge">{{ s }}</span>
+            {% endfor %}
+        </p>
+
+        <p><strong>Company Names:</strong>
+            {% for c in extra.company_names %}
+                <span class="badge">{{ c }}</span>
+            {% endfor %}
+        </p>
+    </div>
+
+    <a href="/" class="btn">Upload Another Resume</a>
+
+    <!-- JD Match -->
+    <div class="card">
+        <h2 class="section-title">Job Description Match</h2>
+
+        {% if jd_keywords %}
+            <p><strong>JD Keywords Found:</strong></p>
+            {% for k in jd_keywords %}
+                <span class="badge">{{ k }}</span>
+            {% endfor %}
+
+            <div class="score-box">
+                <strong>Match Percentage:</strong> {{ jd_match_percent }}%
+            </div>
+
+            <div class="subheading">Matched Skills</div>
+            {% for m in matched_keywords %}
+                <span class="badge match-good">{{ m }}</span>
+            {% endfor %}
+            {% if matched_keywords|length == 0 %}
+                <p>No skills matched.</p>
+            {% endif %}
+
+            <div class="subheading">Missing Skills</div>
+            {% for m in missing_keywords %}
+                <span class="badge match-bad">{{ m }}</span>
+            {% endfor %}
+            {% if missing_keywords|length == 0 %}
+                <p>No missing skills.</p>
+            {% endif %}
+
+        {% else %}
+            <p>No Job Description provided.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

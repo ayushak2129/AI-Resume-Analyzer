@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+</head>
+<body>
+    <h1>Upload Your Resume</h1>
+
+    <form action="/analyze/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Upload Resume:</label><br>
+        <input type="file" name="resume_file" required>
+        <br><br>
+
+        <label>Paste Job Description (Optional):</label><br>
+        <textarea name="job_description" rows="7" cols="60"
+            placeholder="Paste job description here..."></textarea>
+        <br><br>
+
+        <button type="submit">Analyze</button>
+    </form>
+
+</body>
+</html>
