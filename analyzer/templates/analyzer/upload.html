@@ -1,25 +1,103 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="{% static 'analyzer/css/style.css' %}">
 </head>
+
 <body>
-    <h1>Upload Your Resume</h1>
 
-    <form action="/analyze/" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-        <label>Upload Resume:</label><br>
-        <input type="file" name="resume_file" required>
-        <br><br>
+    <div class="upload-page">
 
-        <label>Paste Job Description (Optional):</label><br>
-        <textarea name="job_description" rows="7" cols="60"
-            placeholder="Paste job description here..."></textarea>
-        <br><br>
+        <div class="upload-container">
 
-        <button type="submit">Analyze</button>
-    </form>
+            <div class="brand">
+                <div class="ai-icon">✦</div>
+                <span>AI RESUME ANALYZER</span>
+            </div>
+
+            <h1>
+                Analyze Your Resume
+                <span>with AI</span>
+            </h1>
+
+            <p class="subtitle">
+                Upload your resume and get intelligent insights to improve
+                your chances of landing your dream job.
+            </p>
+
+            <form action="/analyze/" method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <label>Upload Resume</label>
+
+                <div class="upload-box">
+
+                    <div class="upload-icon">📄</div>
+
+                    <h3>Drop your resume here</h3>
+
+                    <p>PDF, DOC or DOCX</p>
+
+                    <input
+                        type="file"
+                        name="resume_file"
+                        id="resume_file"
+                        required
+                    >
+
+                    <label for="resume_file" class="choose-file">
+                        Choose Resume
+                    </label>
+
+                    <div id="file-name">
+                        No file selected
+                    </div>
+
+                </div>
+
+                <label>Job Description <span>(Optional)</span></label>
+
+                <textarea
+                    name="job_description"
+                    placeholder="Paste the job description here..."
+                    rows="6"
+                ></textarea>
+
+                <button type="submit">
+                    <span>Analyze Resume</span>
+                    <span class="arrow">→</span>
+                </button>
+
+            </form>
+
+            <p class="secure-text">
+                🔒 Your resume is securely processed
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("resume_file");
+        const fileName = document.getElementById("file-name");
+
+        fileInput.addEventListener("change", function () {
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+            } else {
+                fileName.textContent = "No file selected";
+            }
+        });
+    </script>
 
 </body>
 </html>

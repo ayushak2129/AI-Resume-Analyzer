@@ -1,0 +1,491 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.35), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.30), transparent 30%),
+        linear-gradient(135deg, #080b1f, #111633 50%, #080b1f);
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 20px;
+
+    overflow-x: hidden;
+}
+
+
+/* Background glowing circles */
+
+.background-glow {
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: 0.25;
+
+    pointer-events: none;
+}
+
+.glow-one {
+    background: #6366f1;
+
+    top: -150px;
+    left: -100px;
+}
+
+.glow-two {
+    background: #a855f7;
+
+    bottom: -150px;
+    right: -100px;
+}
+
+
+/* Main container */
+
+.upload-page {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Content */
+
+.upload-container {
+    width: 100%;
+    max-width: 680px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    color: #a5b4fc;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.ai-icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #a855f7
+    );
+
+    color: white;
+
+    box-shadow:
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+
+/* Heading */
+
+h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+h1 span {
+    display: block;
+
+    background: linear-gradient(
+        90deg,
+        #818cf8,
+        #c084fc
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Subtitle */
+
+.subtitle {
+    max-width: 570px;
+
+    margin: 18px auto 35px;
+
+    color: #a5acc8;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* Form */
+
+form {
+    width: 100%;
+
+    padding: 30px;
+
+    text-align: left;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35);
+
+    animation: fadeIn 0.8s ease;
+}
+
+
+/* Labels */
+
+label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #e5e7eb;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+label span {
+    color: #7f8aa8;
+
+    font-weight: normal;
+}
+
+
+/* Upload box */
+
+.upload-box {
+    position: relative;
+
+    padding: 28px 20px;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    border: 1.5px dashed #6366f1;
+
+    border-radius: 18px;
+
+    background: rgba(99, 102, 241, 0.07);
+
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    border-color: #a855f7;
+
+    background: rgba(99, 102, 241, 0.13);
+
+    transform: translateY(-2px);
+}
+
+
+/* Upload icon */
+
+.upload-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    font-size: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(99, 102, 241, 0.35);
+}
+
+
+/* Upload heading */
+
+.upload-box h3 {
+    margin: 5px 0;
+
+    font-size: 17px;
+
+    color: white;
+}
+
+
+/* Upload description */
+
+.upload-box p {
+    margin: 6px 0 18px;
+
+    color: #8992ad;
+
+    font-size: 13px;
+}
+
+
+/* Hide default file input */
+
+input[type="file"] {
+    display: none;
+}
+
+
+/* Choose file button */
+
+.choose-file {
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    margin-bottom: 10px;
+
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #e5e7eb;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.choose-file:hover {
+    background: rgba(255, 255, 255, 0.18);
+
+    transform: translateY(-2px);
+}
+
+
+/* File name */
+
+#file-name {
+    color: #818cf8;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* Textarea */
+
+textarea {
+    width: 100%;
+
+    min-height: 150px;
+
+    padding: 15px;
+
+    margin-bottom: 22px;
+
+    resize: vertical;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+textarea::placeholder {
+    color: #737b96;
+}
+
+textarea:focus {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+
+/* Analyze button */
+
+button {
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #7c3aed
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(79, 70, 229, 0.3);
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(124, 58, 237, 0.45);
+}
+
+.arrow {
+    font-size: 21px;
+
+    transition: 0.3s;
+}
+
+button:hover .arrow {
+    transform: translateX(5px);
+}
+
+
+/* Security text */
+
+.secure-text {
+    margin-top: 18px;
+
+    color: #69728e;
+
+    font-size: 12px;
+}
+
+
+/* Animation */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* Responsive */
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 30px 15px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    form {
+        padding: 22px;
+    }
+}
+itxkimmiii
